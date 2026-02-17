@@ -1,0 +1,227 @@
+/* Exact CSS from memo.html */
+:root {
+    --morocco-red: #c1272d;
+    --morocco-green: #006233;
+    --gold: #ffcc00;
+    --hud-height: 120px;
+}
+
+.memo-page-body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background-color: #820001;
+    color: white;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+}
+
+/* --- PHONE ONLY: FORCED LANDSCAPE ROTATION --- */
+@media screen and (max-width: 768px) and (orientation: portrait) {
+    :root {
+        --hud-height: 65px;
+    }
+
+    .memo-page-body {
+        position: fixed;
+        width: 100vh !important;
+        height: 100vw !important;
+        top: 0;
+        left: 100vw;
+        transform: rotate(90deg);
+        transform-origin: 0 0;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    #memo-main-container {
+        width: 100vh !important;
+        height: 100% !important;
+    }
+
+    #memo-game-board {
+        display: grid !important;
+        place-content: center !important;
+        height: 100vw !important;
+        width: 100vh !important;
+    }
+
+    .memo-card-container {
+        aspect-ratio: 3857 / 5463 !important;
+        width: min(calc((100vh - 80px) / 9), calc((100vw - 40px) / 3 * (3857 / 5463))) !important;
+        height: auto !important;
+        max-width: calc((100vh - 80px) / 9) !important;
+        max-height: calc((100vw - 40px) / 3) !important;
+    }
+
+    .memo-modal-content {
+        width: 85vh !important;
+        max-height: 90vw !important;
+        padding: 15px !important;
+    }
+
+    .memo-modal-content h2 {
+        font-size: 1.1rem !important;
+    }
+
+    .continue-btn {
+        margin-top: 27px !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        display: block !important;
+        width: 180px !important;
+        height: 55px !important;
+        font-size: 1.4rem !important;
+        background-size: contain !important;
+    }
+
+    .memo-home-btn {
+        position: fixed !important;
+        width: 60px !important;
+        top: 1% !important;
+        left: 38% !important;
+        bottom: auto !important;
+    }
+}
+
+/* Main Container - Full Screen */
+#memo-main-container {
+    width: 100vw;
+    height: 100vh;
+    background-image: url('/assets/d.webp');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+#memo-game-board {
+    display: grid;
+    gap: 10px;
+    padding: 20px;
+    height: 100vh;
+    width: 100vw;
+    box-sizing: border-box;
+    justify-content: center;
+    align-content: center;
+}
+
+.memo-card-container {
+    perspective: 1000px;
+    width: 8vw;
+    max-width: 180px;
+    aspect-ratio: 3857 / 5463;
+}
+
+.memo-card {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+}
+
+.memo-card.flipped {
+    transform: rotateY(180deg);
+}
+
+.memo-card.matched {
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s;
+}
+
+.card-face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+    background-size: 100% 100%;
+    background-position: center;
+}
+
+.card-back {
+    background-image: url('/assets/back.webp');
+    background-color: var(--morocco-red);
+    border: none;
+}
+
+.card-front {
+    transform: rotateY(180deg);
+    background-color: white;
+}
+
+#memo-modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.memo-modal-content {
+    background-image: url('/assets/feed.webp');
+    background-size: 100% 100%;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    width: 80vw;
+    max-width: 800px;
+    aspect-ratio: 16 / 9;
+    color: white;
+    text-shadow: 2px 2px 5px black;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 20px;
+}
+
+.continue-btn {
+    width: 280px;
+    height: 80px;
+    background: url('/assets/b.webp') no-repeat center center;
+    background-size: 100% 100%;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 2.2rem;
+    font-weight: bold;
+    color: #FFDF00;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s;
+    margin-top: 30px;
+}
+
+.continue-btn:hover {
+    transform: scale(1.05);
+}
+
+.memo-home-btn-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.memo-home-btn {
+    width: 80px;
+    transition: transform 0.3s, filter 0.3s;
+}
+
+.memo-home-btn:hover {
+    transform: scale(1.1);
+    filter: drop-shadow(0 0 8px #00ffff) drop-shadow(0 0 15px #ff00ff);
+}
