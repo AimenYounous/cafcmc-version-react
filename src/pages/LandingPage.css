@@ -41,6 +41,15 @@
     min-height: 100vh;
 }
 
+/* 1) Normalize default browser margins */
+.landing-page-body h1,
+.landing-page-body h2,
+.landing-page-body p {
+    margin: 0;
+    padding: 0;
+    line-height: 1.2;
+}
+
 .mobile-only {
     display: none !important;
 }
@@ -51,7 +60,8 @@
     padding: 20px 40px;
     gap: 12px;
     z-index: 10;
-    margin-bottom: 30px;
+    /* 2) Ensure spacing controlled ONLY by defined margin */
+    margin-bottom: 1rem;
 }
 
 .logo-item {
@@ -89,7 +99,9 @@
     width: 100%;
     padding: 0 10%;
     display: flex;
-    align-items: center;
+    /* 3) Switch to top alignment for deterministic spacing */
+    align-items: flex-start;
+    padding-top: 1rem;
     position: relative;
 }
 
@@ -102,13 +114,16 @@
     font-family: var(--headline-font);
     font-weight: normal;
     font-size: clamp(3.1rem, 4.1vw, 5rem);
+    /* 3) Explicit line-height and margins */
     line-height: 1.1;
     letter-spacing: -0.01em;
     word-spacing: -0.2rem;
     text-transform: uppercase;
-    margin-bottom: 0.2rem;
+    margin-top: 0;
+    margin-bottom: 0.5rem;
     white-space: nowrap;
-    transform: translate(-90px, -120px);
+    /* Remove Y transform */
+    transform: translateX(-90px);
 }
 
 .divider {
@@ -117,7 +132,7 @@
     background-color: white;
     margin-top: 0.6rem;
     margin-bottom: 0.3rem;
-    transform: translate(-90px, -120px);
+    transform: translateX(-90px);
 }
 
 .subtext {
@@ -128,8 +143,8 @@
     max-width: 800px;
     letter-spacing: 0.02em;
     word-spacing: -0.2rem;
-    transform: translate(-90px, -125px);
-    margin-bottom: 2rem;
+    transform: translateX(-90px);
+    margin-bottom: 1rem;
 }
 
 .btn-group-row {
@@ -139,11 +154,13 @@
 }
 
 .row-top {
-    transform: translate(-90px, -70px);
+    transform: translateX(-90px);
+    margin-top: 3rem;
 }
 
 .row-bottom {
-    transform: translate(40px, -30px);
+    transform: translateX(40px);
+    margin-top: 2rem;
 }
 
 .image-btn-base {
@@ -189,7 +206,7 @@
 
 .p1-hero {
     position: absolute;
-    right: 0;
+    right: -20%;
     bottom: 0;
     height: 90vh;
     width: auto;
@@ -376,7 +393,7 @@
 
     .p1-hero {
         top: 20px;
-        right: -30%;
+        right: -280px;
         height: 50vh;
         opacity: 0.2;
         z-index: -1;
